@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- hero area start from here  -->
+    <template id="mbd_hero_area" inherit_id="website_sale.product">
+        <xpath expr="//section[@id='product_detail']" position="before">
+            <section class="hero_area"></section>
+        </xpath>
+    </template>
+
+
+    <!-- product details area start from here  -->
+    <template id="mbd_product_details" inherit_id="website_sale.product">
+
+        <!-- for change layout collumn  -->
+        <xpath expr="//div[@id='product_detail_main']/div[contains(@t-attf-class, 'col-lg-#{image_cols[0]}')]" position="attributes">
+            <attribute name="t-attf-class" remove="col-lg-#{image_cols[0]}" add="col-lg-4" separator=" "></attribute>
+        </xpath>
+
+        <xpath expr="//div[@id='product_detail_main']/div[contains(@t-attf-class, 'col-lg-#{image_cols[1]}')]" position="attributes">
+            <attribute name="t-attf-class" remove="col-lg-#{image_cols[1]}" add="col-lg-5" separator=" "></attribute>
+        </xpath>
+
+
+        <xpath expr="//h1[@t-field='product.name']" position="after">
+
+            <p class="Books_subtitle">
+                মিগুয়েল লিতিনের রোমাঞ্চকর অভিযাত্রা
+            </p>
+
+            <div class="books_author_name">
+                <a href="/author/433" title="মাহবুব তালুকদার">
+                    <span>মাহবুব তালুকদার</span>
+                </a>
+            </div>
+
+            <div class="mt-2">
+                <p style="font-size: 18px">বই বাতিঘর একুশে বইমেলা ২০২৩</p>
+            </div>
+        </xpath>
+
+        <xpath expr="//div[@id = 'o_wsale_cta_wrapper']" position="after">
+            <div class="read_book_wrapper mt-3">
+                <a href="#" class="link-underline">
+                    Read Book
+                </a>
+            </div>
+        </xpath>
+
+        <!-- related products slider -->
+        <xpath expr="//div[@id='product_detail_main']" position="inside">
+            <div class="col-lg-3" style="background:#F4F4F4">
+                <div class="my-4">
+                    <t t-call="meta_baatighar_design.mdb_related_product_slider" />
+                </div>
+            </div>
+        </xpath>
+
+    </template>
+
+    <!-- product image layout size change  -->
+    <template id="mbd_product_image_carousel" inherit_id="website_sale.shop_product_carousel">
+        <xpath expr="//div[hasclass('o_carousel_product_outer')]" position="attributes">
+            <attribute name="class">o_carousel_product_outer carousel-outer position-relative flex-grow-1 h-100</attribute>
+        </xpath>
+        <xpath expr="//div[hasclass('carousel-inner')]" position="attributes">
+            <attribute name="class">carousel-inner h-100</attribute>
+        </xpath>
+        
+    </template>
+
+    <!-- single product image at product page -->
+    <template id="product_image_single" inherit_id="website_sale.shop_product_image">
+        <xpath expr="//div[contains(@class, 'position-relative') and contains(@class, 'd-inline-flex')]" position="attributes">
+            <attribute name="class" add="mdb_product_image_full" separator=" "/>
+        </xpath>
+    </template>
+
+
+    <!-- save price -->
+    <template id="mdb_product_price" name="save price" inherit_id="website_sale.product_price">
+        <xpath expr="//div[contains(@t-attf-class, 'product_price')]/h3" position="after">
+            <div>
+                <p class="save_price">
+                    You Save : ৳ <span>4564564</span>
+                </p>
+            </div>
+        </xpath>
+    </template>
+
+
+    <!-- চুম্বক অংশ start from here  -->
+	<template id="mbd_product" inherit_id="website_sale.product">
+		<xpath expr="//section[@id='product_detail']" position="after">
+			<section class="product_magnetic_details">
+				<div class="container">
+					<div class="row">
+						<div class="col-12">
+							<div class="product_magnet_description">
+								<h2 class="fw-medium">
+									চুম্বক অংশ
+								</h2>
+								<div t-if="product.magnetic_content">
+									<p class="fw-normal">
+										<span t-out="product.magnetic_content"/>
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</xpath>
+	</template>
+    <!-- চুম্বক অংশ END here  -->
+
+
+	<!--working with tabs ,start from here  -->
+	<template id="mbd_products_tab" inherit_id="meta_baatighar_design.mbd_product">
+		<xpath expr="//section[@class='product_magnetic_details']" position="after">
+			<div class="container">
+				<div class="row g-0">
+					<div class="col-12">
+						<t t-call="meta_baatighar_design.b_product_tabs"/>
+					</div>
+				</div>
+			</div>
+		</xpath>
+	</template>
+
+	<template id="b_product_tabs" name="Meta Product Tabs">
+		<div class="tp-product-details-tab">
+            <ul class="nav nav-tabs justify-content-center" role="tablist">
+            
+                <li class="nav-item o_not_editable">
+                    <a class="nav-link active" data-bs-toggle="tab" href="#tp-product-description-tab" role="tab" aria-selected="true">
+                        বই সংক্ষেপ
+                    </a>
+                </li>
+
+                <li class="nav-item o_not_editable">
+                    <a class="nav-link" data-bs-toggle="tab" href="#tp-product-authors-tab" role="tab" aria-selected="false">
+                        লেখক
+                    </a>
+                </li>
+
+                <li t-if="is_view_active('website_sale.product_comment')" class="nav-item o_not_editable">
+                    <a class="nav-link" data-bs-toggle="tab" href="#tp-product-rating-tab" role="tab" aria-selected="false">
+                        Ratings  &amp; Reviews
+                    </a>
+                </li>
+            </ul>
+
+            <div class="tab-content">
+                <!-- Description tab-->
+                <div class="tab-pane fade show active" id="tp-product-description-tab" role="tabpanel">
+                    <p class="book_short_desc">
+                        লরেম ইপ্সাম ডলর সিট আমেত, কনসেক্টেচুর অ্যাডিপিস্কিং এলিট। নানসি আল্ট্রিচিস ভ্যারিয়াস আউগিউ ইউ ফ্যাউসিবাস। ইন প্যালেনটেস্কিউ আউগিউ নন নিকিউ টেম্পর ট্রিস্টিক। নিউলা এ পিউরাস অরনারে, ম্যাটুস এনিম স্যাড, ম্যাক্সিমাস মি। ডোনেক পোর্টা রিউট্রাম ডিগনিসসিম। ডোনেক ভাইটা ইরস এলিকুয়াম, রিউট্রাম রাইসাস এট, পরতিটর লরেম। আয়েনান স্যাড এনিম লুকাস। সেড ইয়াকিউলাস এরাট আইডি ম্যাক্সিমাস হেন্ড্রেরিট। নিউলাম এ এফিকিটার ইরস। স্যাড ইউ টিনসিডান্ট ফেলিস, এ অ্যাকিউমসান এক্স। নাম ট্রিস্টিক ভলুটপাত নিসি এট অরনারে। ফিউস্ক ইন টার্পিস কুয়াম। মরবি সাগিটিস ল্যাকটাস ইএস্টি, ভিটায়ে উলামকর্পার নিউলা আলিকেট ভেল। ইন হ্যাক হ্যাবিটাসসে প্ল্যাটিয়া ডিস্কটামস্ট
+
+                        প্রোইন এ ভেস্টিবিউলাম এনিম। ফিউস্ক কুইস কঞ্জিউ আন্তে। নানসি ফাউসিবাস এক্স ইউট প্রিটিয়াম ইউসমড। ইন ইউ অ্যালিকুয়াম লরেম, ইগেট রিউট্রাম ইপ্সাম। ইন নন উক্ট্রিচেস লিগুলা। ইন্টিজার লাওরিট ফ্রিঞ্জিলা টরটর, ইগেট সাগিটিস উর্না। উট ভিভের্রা ডিগ্নিসসিম এলিট কুইজ কনসেকাট। ভিভামাস এসি ম্যাক্সিমাস ডুয়ি, কুইজ ভেনেনাতিস পিউরাস। আএনিয়ান ভিটায়ি ল্যাকিউস নন নিকিউ লাওরিট ফারেটা ভাইটা এট মাসসা। ক্রাস ডিক্টাম ইরাট আইডি ল্যাকিউস ভলিউপাট, নিক পেলেন্টেস্কিউ সেম মালেসিউডা। ক্রাস ফাউচিনাস মলিস ভেলিট ইগেট সলিসিউশুডিন।
+
+                        প্রেজেন্ট ব্লান্ডিট স্যাড ফিউগাট কনসেক্টেচুর। ইন সিট আমেত সাসচিপিট নিসল। নিউলাম কারসাস, নিকিউ নন ইউসমড সডালেস, ওদিও এলিট ইয়াকিউলিস এক্স। এগেত ইমপেরডিয়েট নিউলা ভেলিট ইগেট দুই। প্রেসেন্ট ইউকালিস, এনিম ইগেট প্লেসেটার টিনচিডান্ট, মেটাস জাস্টুম আইডি ফিনিবাস আরকিউ কনসেকাট এট। প্রোইন ডাপিবাস প্লেসেরাট পিউরাস এট কারসাস। মাউরি ভিটায়ি লাউরিট নানসি, ইউ ইউয়াকিউলিস টারপিস। নানসি ইউ রিউট্রাম রাইসাস। স্যাড সাগিটিস ভিভেররা লরেম স্যাড ডিগ্নিসসিম। প্রেসেন্ট ভলাটপাট ইউলাম কর্পার এক্স এট ডিকটাম। ইন ভেল এস্ট ডিয়াম। লরেম ইপ্সাম ডলর সিট আমেত, কনসেক্টেচুর অ্যাডিপিস্কিং এলিট।
+                    </p>
+                </div>
+
+                <!-- authors tab -->
+                <div class="tab-pane fade" id="tp-product-authors-tab" role="tabpanel">
+                    <div class="author_details_tab">
+                        <div class="author_tab_img">
+                            <img src="https://www.nobelprize.org/images/marquez-13345-content-portrait-mobile-tiny.jpg"/>
+                        </div>
+                        <div>
+                            <h2>
+                                Gabriel Garcia Marquez            
+                            </h2>
+                            <p>
+                                গাব্রিয়েল গার্সিয়া মার্কেস (জন্ম: ৬ মার্চ, ১৯২৭ - মৃত্যু: ১৭ এপ্রিল, ২০১৪ ), যিনি গাবো নামেও পরিচিত ছিলেন, একজন কলম্বীয় সাহিত্যিক, সাংবাদিক, প্রকাশক ও রাজনীতিবিদ এবং ১৯৮২ খ্রিষ্টাব্দে সাহিত্যে নোবেল পুরস্কার লাভ করেন। নিঃসঙ্গতার একশ বছর বইয়ের লেখক হিসেবে তিনি বিশেষভাবে পরিচিত। কলম্বিয়ার সন্তান গার্সিয়া মার্কেস জীবনের বেশিরভাগ সময় বসবাস করেছেন মেক্সিকো এবং ইউরোপের বিভিন্ন শহরে। এই বিশ্ব বিখ্যাত কলম্বীয়, স্প্যানিয় ভাষী ঔপন্যাসিক বিংশ শতাব্দীর শেষার্ধের সবচেয়ে আলোচিত, সবচেয়ে প্রভাবশালী লেখক হিসেবে আবির্ভূত হয়েছিলেন। জীবনের শেষ দুই যুগ তিনি ক্যান্সারের সঙ্গে যুদ্ধ করে বেঁচেছিলেন। এ সময় তার লেখালেখি কমে আসে; জনসংযোগ ও ভ্রমণ হয়ে পড়ে সীমিত। এমনকী ২০০২-এ আত্মজীবনীর প্রথম খণ্ড লিভিং টু টেল আ টেইল প্রকাশের পর পরিকল্পিত ২য় এবং ৩য় খণ্ড আর রচনা করা হয়ে ওঠেনি। তিনি দূরারোগ্য লিম্ফেটিক ক্যান্সারে ভুগছিলেন। ২০১২'র জুলাই থেকে তিনি স্মৃতি বিনষ্টিতে আক্রান্ত হন। মৃত্যুকালে তিনি একটি অপ্রকাশিত পাণ্ডুলিপি রেখে গিয়েছেন।সাহিত্যবিশারদদের মতে তিনি হোর্হে লুইস বোর্হেস এবং হুলিও কোর্তাসারের সাথে বিংশ শতাব্দীর অন্যতম শ্রেষ্ঠ দক্ষিণ আমেরিকান কথাসাহিত্যিক। একই সঙ্গে জনপ্রিয় এবং মহৎ লেখক হিসেবে চার্লস ডিকেন্স, লেভ তলস্তয় ও আর্নেস্ট হেমিংওয়ের সঙ্গে তার নাম এক কাতারে উচ্চারিত হয়। ১৯৮২ খ্রিষ্টাব্দে নোবেল পুরস্কার প্রদানের সময় সুইডিশ একাডেমি এমত মন্তব্য করেছিল যে তার প্রতিটি নতুন গ্রন্থের প্রকাশনা বিশ্বব্যাপী গুরুত্বপূর্ণ ঘটনার মতো। জনমানুষের সঙ্গে রাজনৈতিক যোগাযোগের কারণে তিনি ছিলেন বিশেষভাবে প্রসিদ্ধ। কিউবার নেতা ফিদেল ক্যাস্ট্রোর সঙ্গে তার বন্ধুত্ব ছিল প্রবাদপ্রতীম।
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Ratings tab-->
+                <div t-if="is_view_active('website_sale.product_comment')" class="tab-pane fade" id="tp-product-rating-tab" role="tabpanel">
+                    <div class="o_shop_discussion_rating container">
+                        <section class="container">
+                            <div class="row m-0 mt-2">
+                                <div class="col-lg-8 offset-lg-2">
+                                    <t t-call="portal.message_thread">
+                                        <t t-set="object" t-value="product"/>
+                                        <t t-set="display_rating" t-value="True"/>
+                                        <t t-set="message_per_page" t-value="10"/>
+                                    </t>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+	</template>
+	<!--working with tabs, END here  -->
+
+    <!-- related product slider full design start  -->
+    <template id="mdb_related_product_slider" name="related_slider">
+        <div>
+            <div class="related_product_titles"> 
+                <h4>Related Product</h4>
+            </div> 
+            
+            <div class="related_products_wrapper">
+                <div class="class_carousel">
+                    <div class="item">
+                        <a class="related_product_item_link">
+                            <div class="related_product_item_img">
+                                <img src="/meta_baatighar_design/static/description/images/citronatto.png" alt="" class="img-fluid"/>
+                            </div>
+                            <div class="ms-3">
+                                <h3 class="fs-4">চিত্রনাট্যের কর্মশালা</h3>
+                                <p class="fs-6">
+                                    মিগুয়েল লিতিনের রোমাঞ্চকর 
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="item">
+                        <a class="related_product_item_link">
+                            <div class="related_product_item_img">
+                                <img src="/meta_baatighar_design/static/description/images/citronatto.png" alt="" class="img-fluid"/>
+                            </div>
+                            <div class="ms-3">
+                                <h3 class="fs-4">চিত্রনাট্যের কর্মশালা</h3>
+                                <p class="fs-6">
+                                    মিগুয়েল লিতিনের রোমাঞ্চকর 
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="item">
+                        <a class="related_product_item_link">
+                            <div class="related_product_item_img">
+                                <img src="/meta_baatighar_design/static/description/images/citronatto.png" alt="" class="img-fluid"/>
+                            </div>
+                            <div class="ms-3">
+                                <h3 class="fs-4">চিত্রনাট্যের কর্মশালা</h3>
+                                <p class="fs-6">
+                                    মিগুয়েল লিতিনের রোমাঞ্চকর 
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="item">
+                        <a class="related_product_item_link">
+                            <div class="related_product_item_img">
+                                <img src="/meta_baatighar_design/static/description/images/citronatto.png" alt="" class="img-fluid"/>
+                            </div>
+                            <div class="ms-3">
+                                <h3 class="fs-4">চিত্রনাট্যের কর্মশালা</h3>
+                                <p class="fs-6">
+                                    মিগুয়েল লিতিনের রোমাঞ্চকর 
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slider_button">
+                <button>
+                    <img src="/meta_baatighar_design/static/description/images/arrow_icons/prevArrow.svg" alt=""/>
+                </button>
+                <button>
+                    <img src="/meta_baatighar_design/static/description/images/arrow_icons/nextArrow.svg" alt=""/>
+                </button>
+            </div>
+
+        </div>
+    </template>
+
+</odoo>
+
+
+
+<!-- # local site : /home/riad/odoo_learning/baatighar_17/custom/addons/ -->

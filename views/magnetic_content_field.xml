@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="meta_magnetic_content" model="ir.ui.view">
+        <field name="name">product.meta.magnetic.content.view</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='variants']" position="after">
+                    <page name="magnetic_content" string="Magnetic Content">
+                        <field name="magnetic_content" widget="html" />
+                    </page>
+            </xpath>
+       </field>
+   </record>
+</odoo>
